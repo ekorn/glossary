@@ -12,13 +12,6 @@ console.log(keywords)  // ["cake", "shop", "cake shop", "business"]
 
 `glossary` is standalone and uses part-of-speech analysis to extract the relevant terms.
 
-# install
-
-For [node](http://nodejs.org) with [npm](http://npmjs.org):
-
-```bash
-npm install glossary
-```
 
 # API
 
@@ -32,6 +25,20 @@ var glossary = require("glossary")({
 });
 
 var keywords = glossary.extract("JavaScript color conversion library");
+
+console.log(keywords); // ["color", "conversion"]
+```
+
+#### blacklisting with Regular Exprssions
+
+Use `regExs` to remove unwanted terms from any extraction:
+
+```javascript
+var glossary = require("glossary")({
+   regExs: [/(^|\s)@(\w+)/g , /(^|\s)#(\w+)/g]
+});
+
+var keywords = glossary.extract("#JavaScript color conversion @library");
 
 console.log(keywords); // ["color", "conversion"]
 ```
@@ -68,6 +75,18 @@ Use `verbose` to also get the count of each term:
 var glossary = require("./glossary")({ verbose: true });
 
 var keywords = glossary.extract("The pears from the farm are good");
+
+console.log(keywords); // [ { word: 'pears', count: 1 }, { word: 'farm', count: 1 } ]
+```
+
+#### change options per extraction
+
+You can also pass options as a second parameter to the extract function. 
+
+```javascript
+var glossary = require("./glossary");
+
+var keywords = glossary.extract("The pears from the farm are good",{ verbose: true });
 
 console.log(keywords); // [ { word: 'pears', count: 1 }, { word: 'farm', count: 1 } ]
 ```
