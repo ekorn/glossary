@@ -22,9 +22,14 @@ function Glossary(opts) {
    
    return {
       extract: function(text, options ) {
-        if(options !== void 0){
-          opts = options;
-        }
+          opts =  _(options || {}).defaults({
+              minFreq: 1,
+              collapse: false,
+              blacklist: [],
+              reExs: [],
+              verbose: false
+           });
+           
          var tags = new pos.Tagger().tag(new pos.Lexer().lex(text)),
              terms = {},
              multiterm = [];
