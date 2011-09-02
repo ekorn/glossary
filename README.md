@@ -90,8 +90,12 @@ var keywords = glossary.extract("The pears from the farm are good",{ verbose: tr
 
 console.log(keywords); // [ { word: 'pears', count: 1 }, { word: 'farm', count: 1 } ]
 ```
+
 # Keywords
-This is just a little extension it add language detection via [node-language-detect](https://github.com/FGRibreau/node-language-detect) and filters out some stopwords (from [ranks.nl](http://www.ranks.nl/resources/stopwords.html) ) to improve non English results. 
+This is just a little extension it add language detection via [node-language-detect](https://github.com/FGRibreau/node-language-detect) 
+and filters out some stopwords (from [ranks.nl](http://www.ranks.nl/resources/stopwords.html) ) 
+to improve non English results. 
+
 ```javascript
 var keywords = require("./keywords");
 
