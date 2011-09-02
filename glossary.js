@@ -16,11 +16,15 @@ function Glossary(opts) {
       minFreq: 1,
       collapse: false,
       blacklist: [],
+      reExs: [],
       verbose: false
    });
    
    return {
-      extract: function(text) {
+      extract: function(text, options ) {
+        if(options !== void 0){
+          opts = options;
+        }
          var tags = new pos.Tagger().tag(new pos.Lexer().lex(text)),
              terms = {},
              multiterm = [];
@@ -83,7 +87,15 @@ function Glossary(opts) {
               }) 
            })
         }
-
+        
+        if (opts.regExs) {
+           terms = _(terms).reject(function(term) {
+              return _(opts.regExs).any(function(regEx) {
+                 return term.norm.match(regEx);
+              }) 
+           })
+        }
+        
         if (!opts.verbose) {
            terms = _(terms).pluck("word");
         }
