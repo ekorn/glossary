@@ -1,8 +1,11 @@
 var _ = require("underscore"),
     pos = require("pos"),
     natural = require("natural"),
-    inflector = new natural.NounInflector();
-  
+    inflector = new natural.NounInflector(),
+    LanguageDetect = require('languagedetect');
+    
+var lngDetector = new LanguageDetect();
+
 module.exports = Glossary;
 
 Glossary.extract = Glossary().extract;
@@ -22,6 +25,7 @@ function Glossary(opts) {
    
    return {
       extract: function(text, options ) {
+        if(!_.isUndefined(options)){
           opts =  _(options || {}).defaults({
               minFreq: 1,
               collapse: false,
@@ -29,7 +33,8 @@ function Glossary(opts) {
               reExs: [],
               verbose: false
            });
-           
+        }
+         
          var tags = new pos.Tagger().tag(new pos.Lexer().lex(text)),
              terms = {},
              multiterm = [];

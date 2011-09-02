@@ -11,7 +11,8 @@
     "dependencies": {
         "natural": ">=0.0.28",
         "pos": "0.1.x",
-        "underscore": "1.1.x"
+        "underscore": "1.1.x",
+        "languagedetect": ">=0.0.1"
     },
     "keywords": ["term extraction", "keyword", "tag", "auto tag"]
 }
