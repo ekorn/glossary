@@ -1,10 +1,9 @@
 var _ = require("underscore"),
     pos = require("pos"),
     natural = require("natural"),
-    inflector = new natural.NounInflector(),
-    LanguageDetect = require('languagedetect');
-    
-var lngDetector = new LanguageDetect();
+    inflector = new natural.NounInflector();
+
+
 
 module.exports = Glossary;
 
@@ -34,7 +33,7 @@ function Glossary(opts) {
               verbose: false
            });
         }
-         
+
          var tags = new pos.Tagger().tag(new pos.Lexer().lex(text)),
              terms = {},
              multiterm = [];
